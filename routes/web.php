@@ -1,60 +1,106 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// dashboard pages
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('pages.dashboard.ecommerce', ['title' => 'E-commerce Dashboard']);
+})->name('dashboard');
 
-// Route untuk autentikasi (login, logout, lupa password, reset password)
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// calender pages
+Route::get('/calendar', function () {
+    return view('pages.calender', ['title' => 'Calendar']);
+})->name('calendar');
 
-Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+// profile pages
+Route::get('/profile', function () {
+    return view('pages.profile', ['title' => 'Profile']);
+})->name('profile');
 
-// Route untuk pendaftaran (bisa diakses sebelum login)
-Route::get('/register', [RegistrationController::class, 'showRegisterForm'])->name('register.show');
-Route::post('/register', [RegistrationController::class, 'register'])->name('register');
+// form pages
+Route::get('/form-elements', function () {
+    return view('pages.form.form-elements', ['title' => 'Form Elements']);
+})->name('form-elements');
 
-// API untuk dropdown alamat dinamis
-Route::get('/api/regencies/{provinceId}', [RegistrationController::class, 'getRegencies'])->name('api.regencies');
-Route::get('/api/districts/{regencyId}', [RegistrationController::class, 'getDistricts'])->name('api.districts');
-Route::get('/api/villages/{districtId}', [RegistrationController::class, 'getVillages'])->name('api.villages');
+// tables pages
+Route::get('/basic-tables', function () {
+    return view('pages.tables.basic-tables', ['title' => 'Basic Tables']);
+})->name('basic-tables');
 
-// Route untuk member (memerlukan auth dan role member)
-Route::middleware(['auth', 'role:member'])->prefix('member')->name('member.')->group(function () {
-    Route::get('/dashboard', [MemberController::class, 'dashboard'])->name('dashboard');
-    Route::post('/withdraw', [MemberController::class, 'requestWithdraw'])->name('withdraw');
-    // Tambahkan route lain untuk member di sini (akses produk, profil, dll)
-});
+// pages
 
-// Route untuk admin (memerlukan auth dan role admin)
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/marketing-pins', [AdminController::class, 'manageMarketingPins'])->name('marketing-pins');
-    Route::post('/marketing-pins', [AdminController::class, 'createMarketingPin'])->name('marketing-pins.create');
-    Route::get('/withdrawals', [AdminController::class, 'manageWithdrawals'])->name('withdrawals');
-    Route::post('/withdrawals/{id}/confirm', [AdminController::class, 'confirmWithdrawal'])->name('withdrawals.confirm');
-    // Tambahkan route lain untuk admin di sini (manajemen produk, laporan, dll)
-});
+Route::get('/blank', function () {
+    return view('pages.blank', ['title' => 'Blank']);
+})->name('blank');
+
+// error pages
+Route::get('/error-404', function () {
+    return view('pages.errors.error-404', ['title' => 'Error 404']);
+})->name('error-404');
+
+// chart pages
+Route::get('/line-chart', function () {
+    return view('pages.chart.line-chart', ['title' => 'Line Chart']);
+})->name('line-chart');
+
+Route::get('/bar-chart', function () {
+    return view('pages.chart.bar-chart', ['title' => 'Bar Chart']);
+})->name('bar-chart');
+
+
+// authentication pages
+Route::get('/signin', function () {
+    return view('pages.auth.signin', ['title' => 'Sign In']);
+})->name('signin');
+
+Route::get('/signup', function () {
+    return view('pages.auth.signup', ['title' => 'Sign Up']);
+})->name('signup');
+
+// ui elements pages
+Route::get('/alerts', function () {
+    return view('pages.ui-elements.alerts', ['title' => 'Alerts']);
+})->name('alerts');
+
+Route::get('/avatars', function () {
+    return view('pages.ui-elements.avatars', ['title' => 'Avatars']);
+})->name('avatars');
+
+Route::get('/badge', function () {
+    return view('pages.ui-elements.badges', ['title' => 'Badges']);
+})->name('badges');
+
+Route::get('/buttons', function () {
+    return view('pages.ui-elements.buttons', ['title' => 'Buttons']);
+})->name('buttons');
+
+Route::get('/image', function () {
+    return view('pages.ui-elements.images', ['title' => 'Images']);
+})->name('images');
+
+Route::get('/videos', function () {
+    return view('pages.ui-elements.videos', ['title' => 'Videos']);
+})->name('videos');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
