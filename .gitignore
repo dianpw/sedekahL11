@@ -1,9 +1,25 @@
-/vendor/
+# IDE & OS
 .idea/
+.DS_Store
+Thumbs.db
+
+# Node
 /node_modules/
-/.env
-/.env.backup
-/.phpunit.result.cache
+npm-debug.log
+yarn-error.log
+
+# Env
+.env
+.env.backup
+
+# Laravel dev cache
+.phpunit.result.cache
+/public/hot
+
+# SQLite local
+database/database.sqlite
+
+# Storage runtime
 /storage/*.key
 /storage/app/*
 !/storage/app/.gitignore
@@ -15,10 +31,3 @@
 !/storage/framework/views/.gitignore
 /storage/logs/*
 !/storage/logs/.gitignore
-.DS_Store
-Thumbs.db
-database/database.sqlite
-laravel
-/public/hot
-npm-debug.log
-yarn-error.log
